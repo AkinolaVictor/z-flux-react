@@ -1,0 +1,6 @@
+npm i --save-dev rollup-plugin-postcss --legacy-peer-deps
+npm i --save-dev @rollup/plugin-styles --legacy-peer-deps
+
+what are alternatives to rollup-plugin-postcss that i can use in my rollup project
+
+why am i getting this error, even though i have reinstalled the rollup-plugin-postcss again and again
