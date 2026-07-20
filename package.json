@@ -9,6 +9,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build-lib2": "rollup -c",
+    "build": "rollup -c",
     "build-lib": "rollup -c --bundleConfigAsCjs",
     "git": "git add . && git commit -m 'updated...' && git push origin master",
     "build-publish": "npm run build-lib2 && npm run git && npm publish"
@@ -23,10 +24,14 @@
   "homepage": "https://z-flux.vercel.app/",
   "keywords": [
     "react",
+    "animation",
     "web animation",
     "web components",
-    "webflux",
-    "flux"
+    "z-flux",
+    "flux",
+    "gsap", 
+    "ui", 
+    "components"
   ],
   "peerDependencies": {
     "react": ">=16",
