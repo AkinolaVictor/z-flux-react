@@ -1,6 +1,7 @@
 // import TextAnimationTemplate from "./TextAnimationTemplate"
 // import TextColorFade from "./TextColorFade"
 // import TextRevealByHeight from "./TextRevealByHeight"
+import VerticalScroll from "../VerticalScroll"
 import TextEngine from "./TextEngine"
 import TextFade from "./textEngineVarieties/TextFade"
 import TextFadeDown from "./textEngineVarieties/TextFadeDown"
@@ -21,7 +22,9 @@ export const text_components = {
     TextFadeSkew,
     TextFadeSkew_2,
     TextFadeDown,
-    TextFadeOverlay
+    TextFadeOverlay,
+
+    VerticalScroll
 }
 // module.exports = {TextAnimationTemplate}
 

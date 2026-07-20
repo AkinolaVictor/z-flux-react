@@ -1,6 +1,6 @@
 {
   "name": "z-flux-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A web animation components library for react projects",
   "license": "MIT",
   "author": "Akinola Victor",
@@ -29,8 +29,8 @@
     "web components",
     "z-flux",
     "flux",
-    "gsap", 
-    "ui", 
+    "gsap",
+    "ui",
     "components"
   ],
   "peerDependencies": {
@@ -40,7 +40,8 @@
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "@types/react": "^19.2.14",
-    "gsap": "3.15.0"
+    "gsap": "3.15.0",
+    "z-flux-utils": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
