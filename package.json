@@ -12,7 +12,8 @@
     "build": "rollup -c",
     "build-lib": "rollup -c --bundleConfigAsCjs",
     "git": "git add . && git commit -m 'updated...' && git push origin master",
-    "build-publish": "npm run build-lib2 && npm run git && npm publish"
+    "build-publish": "npm run build-lib2 && npm run git && npm publish",
+    "push": "npm run git && npm publish"
   },
   "repository": {
     "type": "git",
