@@ -1,3 +1,4 @@
+import { components } from "./components"
 import { text_components } from "./components/texts"
 // import {components} from "./components"
 
@@ -19,7 +20,11 @@ export const {
 
 } = text_components
 
+export const {
+    Z_Text,
+    VerticalScroll
+} = components
+
 
 // export const {VerticalScroll} = components
-export * as VerticalScroll from "./components/VerticalScroll"
 
