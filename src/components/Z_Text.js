@@ -13,8 +13,7 @@ export default function Z_Text(props) {
         scrollingElement,
         progression="char",
         animation= "Fade",
-        playOnScroll=false,
-        playInView=false,
+        trigger, // onscroll, inview, none
         controllerRef=null,
         style,
         className,
@@ -30,6 +29,8 @@ export default function Z_Text(props) {
     const [fontLoaded, setFontLoaded] = useState(false)
     const [resizeTick, setResizeTick] = useState(0);
 
+    const playOnScroll = trigger==="onscroll"
+    const playInView = trigger==="inview"
     const paused = playOnScroll || playInView
     const tl = timeline ?? gsap.timeline({ paused, delay });
     
@@ -38,10 +39,12 @@ export default function Z_Text(props) {
     }
 
     function initi_animation() {
+        if(trigger==="none") return
+
         const element = containerRef.current;
         if (!element || !fontLoaded) return;
         const ctx = gsap.context(() => {
-            const scroller = scrollingElement?document.querySelector(`${scrollingElement}`):findScrollingElement(".fade_textation_x");
+            const scroller = scrollingElement?document.querySelector(`${scrollingElement}`):findScrollingElement(element, true);
 
             const split = SplitText.create(element, {
                 type: "lines,words,chars",
@@ -116,6 +119,7 @@ export default function Z_Text(props) {
                     trigger: element,
                     scroller,
                     start: "top bottom",
+                    animation: tl,
                     onEnter: () => tl.restart(),
                     onLeaveBack: () => tl.pause(),
                     ...triggerOptions
@@ -162,6 +166,7 @@ export default function Z_Text(props) {
             dependencies: [
                 fontLoaded,
                 resizeTick,
+                trigger
             ]
         }
     );
@@ -186,7 +191,7 @@ export default function Z_Text(props) {
         <p 
             className={`fade_textation_x ${className}`}
             style={{
-                visibility: fontLoaded?"visible":"hidden" ,
+                visibility: fontLoaded?"visible":"hidden",
                 ...style
             }} 
             ref={containerRef}
