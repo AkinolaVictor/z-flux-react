@@ -17,7 +17,8 @@ export const {
 
 export const {
     Z_Text,
-    VerticalScroll
+    VerticalScroll,
+    Overlay_Text
 } = components
 
 
