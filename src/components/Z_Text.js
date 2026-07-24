@@ -12,7 +12,7 @@ export default function Z_Text(props) {
         text, 
         scrollingElement,
         progression="char",
-        animation= "Fade",
+        animation,
         trigger, // onscroll, inview, none
         controllerRef=null,
         style,
@@ -26,13 +26,13 @@ export default function Z_Text(props) {
         watch=false
     } = props
     const containerRef = useRef(null);
-    const [fontLoaded, setFontLoaded] = useState(false)
     const [resizeTick, setResizeTick] = useState(0);
 
     const playOnScroll = trigger==="onscroll"
     const playInView = trigger==="inview"
     const paused = playOnScroll || playInView
     const tl = timeline ?? gsap.timeline({ paused, delay });
+    const useAnimation = animation_list[animation] ?? animation_list["Fade"]
     
     if(controllerRef){
         controllerRef.current = tl
@@ -42,7 +42,7 @@ export default function Z_Text(props) {
         if(trigger==="none") return
 
         const element = containerRef.current;
-        if (!element || !fontLoaded) return;
+        if (!element) return;
         const ctx = gsap.context(() => {
             const scroller = scrollingElement?document.querySelector(`${scrollingElement}`):findScrollingElement(element, true);
 
@@ -65,9 +65,9 @@ export default function Z_Text(props) {
                 playOnScroll
             );
 
-            const useAnimation = animation_list[animation] ?? animation_list["Fade"]
 
             const fromAnimation = {
+                visibility: "visible",
                 ...build_extend_animation(useAnimation, "from"),
                 ...build_extend_animation(extendAnimation, "from")
             };
@@ -149,24 +149,13 @@ export default function Z_Text(props) {
         return cleanup;
     }, [watch]);
 
-    useEffect(() => {
-        let mounted = true;
-        async function waitForFonts() {
-            await document.fonts.ready;
-            if (mounted) setFontLoaded(true);
-        }
-        waitForFonts();
-        return () => mounted = false;
-    }, []);
-
     useGSAP(
         initi_animation,
         {
             scope: containerRef,
             dependencies: [
-                fontLoaded,
                 resizeTick,
-                trigger
+                props
             ]
         }
     );
@@ -175,7 +164,7 @@ export default function Z_Text(props) {
         return React.cloneElement(children, {
             ref: containerRef,
             style: {
-                visibility: fontLoaded?"visible":"hidden",
+                visibility: "hidden",
                 ...style,
                 ...children.props.style
             },
@@ -191,7 +180,7 @@ export default function Z_Text(props) {
         <p 
             className={`fade_textation_x ${className}`}
             style={{
-                visibility: fontLoaded?"visible":"hidden",
+                visibility: "hidden",
                 ...style
             }} 
             ref={containerRef}

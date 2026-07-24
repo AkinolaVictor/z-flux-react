@@ -32,13 +32,14 @@ export default function Overlay_Text(props) {
         layerColor="white",
         RenderLayer=DefalutLayerComponent,
         animationOrder="normal", //reverse, normal, random
-        animation="VerticalReveal",
+        animation,
         animationDimension="y",
         extendAnimation,
         gsapScrollTrigger,
         controllerRef=null,
         useOpacity,
         animationDirection=0,
+        onClick
     } = props
 
     const containerRef = useRef(null)
@@ -52,7 +53,7 @@ export default function Overlay_Text(props) {
         controllerRef.current = tl
     }
     
-    const anim = overlay_text_animations[animation]
+    const anim = overlay_text_animations[animation] || overlay_text_animations["VerticalReveal"]
     const {defaultGsap, animation_origins, animationStyles} = anim
 
     function animate_func(){
@@ -137,18 +138,7 @@ export default function Overlay_Text(props) {
     useLayoutEffect(()=>{
         const anim = animate_func()
         return anim
-    }, [
-        animation, 
-        animationOrder, 
-        scrollingElement, 
-        extendAnimation, 
-        gsapScrollTrigger, 
-        stagger, 
-        animationDirection,
-        overlay_text_animations,
-        tl,
-        trigger
-    ])
+    }, [ props ])
 
     return (
         <div  
@@ -162,7 +152,9 @@ export default function Overlay_Text(props) {
                 position: "relative",
                 ...containerStyle
             }}
+            onClick={onClick}
             className={`overlay_text_container ${containerClass}`}
+            
         >
             {
                 text?
