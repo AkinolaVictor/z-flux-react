@@ -1,6 +1,6 @@
 import { useGSAP } from '@gsap/react';
 import React, { useEffect, useRef, useState } from 'react';
-import { animation_list, build_extend_animation, findScrollingElement, getProgressionData } from 'z-flux-utils';
+import { animation_list, build_extend_animation, findScrollingElement, getProgressionData, randomizeArray } from 'z-flux-utils';
 import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -13,6 +13,7 @@ export default function Z_Text(props) {
         scrollingElement,
         progression="char",
         animation,
+        animationOrder="random", //firstToLast, lastToFirst, random
         trigger, // onscroll, inview, none
         controllerRef=null,
         style,
@@ -31,8 +32,8 @@ export default function Z_Text(props) {
     const playOnScroll = trigger==="onscroll"
     const playInView = trigger==="inview"
     const paused = playOnScroll || playInView
-    const tl = timeline ?? gsap.timeline({ paused, delay });
     const useAnimation = animation_list[animation] ?? animation_list["Fade"]
+    const tl = timeline ?? gsap.timeline({ paused, delay });
     
     if(controllerRef){
         controllerRef.current = tl
@@ -53,8 +54,30 @@ export default function Z_Text(props) {
                 wordsClass: "word",
                 charsClass: "char"
             });
+            
+            const words = (
+                animationOrder=="lastToFirst"?
+                split.words.reverse():
+                animationOrder=="random"?
+                randomizeArray(split.words):
+                split.words
+            )
+            
+            const lines = (
+                animationOrder=="lastToFirst"?
+                split.lines.reverse():
+                animationOrder=="random"?
+                randomizeArray(split.lines):
+                split.lines
+            )
 
-            const { chars, words, lines } = split;
+            const chars = (
+                animationOrder=="lastToFirst"?
+                split.chars.reverse():
+                animationOrder=="random"?
+                randomizeArray(split.chars):
+                split.chars
+            )
 
             const progressionData = getProgressionData(
                 progression,
@@ -67,16 +90,16 @@ export default function Z_Text(props) {
 
 
             const fromAnimation = {
-                visibility: "visible",
                 ...build_extend_animation(useAnimation, "from"),
                 ...build_extend_animation(extendAnimation, "from")
             };
-
+            
             const toAnimation = {
                 ...build_extend_animation(useAnimation, "to"),
                 ...build_extend_animation(extendAnimation, "to")
             };
-
+            
+            containerRef.current.style.visibility = "visible"
             tl.set(progressionData.set, fromAnimation);
 
             const grouped = progression === "char_line" || progression === "word_line";
