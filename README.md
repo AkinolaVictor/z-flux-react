@@ -6,7 +6,7 @@
 
 </div>
 
-# daisyUI 5
+# Z-Flux-React
 
 ### 🌼 [Official website →](https://z-flux.vercel.app/)
 
