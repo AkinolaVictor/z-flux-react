@@ -37,7 +37,7 @@
   "peerDependencies": {
     "react": ">=16",
     "react-dom": ">=16",
-    "z-flux-utils": ">=1.0.7"
+    "z-flux-utils": ">=1.1.11"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
