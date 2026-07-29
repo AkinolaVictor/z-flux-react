@@ -14,7 +14,7 @@ export default function Z_Text(props) {
         progression="char",
         animation,
         animationOrder="firstToLast", //firstToLast, lastToFirst, random
-        trigger, // onscroll, inview, none
+        trigger, // onscroll, inview, none, 
         controllerRef=null,
         style,
         className,
@@ -40,7 +40,6 @@ export default function Z_Text(props) {
         paused, 
         delay, 
         repeat: repeatAnimation=="loop"?-1:repeatAnimation,
-        yoyo: true
     });
     
     if(controllerRef){
