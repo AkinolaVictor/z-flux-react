@@ -2,7 +2,7 @@
 
 [![][logo-url]][docs-url]
 
-**An open-source collection of beautifully crafted, web components.**
+**Z-Flux is an open-source collection of beautifully crafted web components.**
 
 </div>
 
