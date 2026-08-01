@@ -69,7 +69,7 @@ export default function Z_Text(props) {
                 randomizeArray(split.words):
                 split.words
             )
-        
+            
             const lines = (
                 animationOrder=="lastToFirst"?
                 split.lines.reverse():
