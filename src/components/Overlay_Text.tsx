@@ -51,7 +51,7 @@ interface OverlayTextProps {
     layerColor?: string;
     RenderLayer?: React.ComponentType<RenderLayerProps>;
     animationOrder?: AnimationOrder;
-    animation?: keyof typeof overlay_text_animations;
+    animation: keyof typeof overlay_text_animations;
     animationDimension?: AnimationDimension;
     extendAnimation?: unknown;
     gsapScrollTrigger?:

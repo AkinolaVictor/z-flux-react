@@ -21,6 +21,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
 type Trigger = "onscroll" | "inview" | "none";
+type Progression = "char" | "word" | "line" | "char_line" | "word_line";
 
 type AnimationOrder =
     | "firstToLast"
@@ -41,7 +42,7 @@ interface ProgressionData {
 interface ZTextProps {
     text?: string;
     scrollingElement?: string;
-    progression?: string;
+    progression?: Progression;
     animation: keyof typeof z_text_animations;
     animationOrder?: AnimationOrder;
     trigger?: Trigger;
