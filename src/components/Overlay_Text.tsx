@@ -129,6 +129,10 @@ export default function Overlay_Text({
         animation_origins,
     } = anim;
 
+    const color = animation=="OpacityX"||animation=="OpacityY"?
+                overlay_text_animations.OpacityX.color:
+                null
+
     function animate_func() {
         if (trigger === "none") return;
 
@@ -322,7 +326,7 @@ export default function Overlay_Text({
                                         ? layerWidth.lastWidth
                                         : layerWidth.eachWidth,
                                 willChange: "transform",
-                                background: layerColor,
+                                background: color||layerColor,
                                 transformOrigin:
                                     typeof animationDirection ===
                                     "number"
